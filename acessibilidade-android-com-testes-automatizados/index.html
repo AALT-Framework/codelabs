@@ -60,7 +60,7 @@
 <h2 is-upgraded>Configure o projeto para usar o AATK</h2>
 <p>Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:</p>
 <ol type="1">
-<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando a seguinte linha na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <em>Gradle Scripts. Dentro, há um arquivo chamado build.gradle (Project: Counter).  </em></p>
+<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando a seguinte linha na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado build.gradle (Project: Counter).  </p>
 </aside>
 <pre><code language="language-groovy" class="language-groovy">allprojects {
     repositories {
@@ -70,14 +70,37 @@
 }
 </code></pre>
 </li>
+<li>Configure seu arquivo <strong>build.gradle</strong> no nível do aplicativo para habilitar a execulção de testes com o Robolectric e o AATK, atualizando os <strong>testOptions</strong> e adicionando as dependências necessárias.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <em>build.gradle (Módulo: Counter.app)</em>, ou algo parecido.  </p>
+</aside>
+Primeiro, adicione a diretiva <strong>testOptions</strong> com as seguintes linhas, dentro da diretiva <strong>android</strong>, assim:<pre><code language="language-groovy" class="language-groovy">android{
+    ...
+    testOptions {
+        // Usado para testar elementos dependentes do Android na pasta de teste
+        unitTests.includeAndroidResources  = true
+        unitTests.returnDefaultValues = true
+    }
+}
+</code></pre>
+Em seguida, adicione estas duas dependências como <code>testImplementation</code>:<pre><code language="language-groovy" class="language-groovy">dependencies {
+    ...
+    testImplementation &#39;org.robolectric:robolectric:4.9&#39;
+    testImplementation &#39;com.github.andersongarcia:android-accessibility-test-kit:v1.0.0&#39;
+    ...
+}
+</code></pre>
+</li>
 </ol>
 <aside class="special"><p><strong>Dica:</strong> leia mais sobre <a href="https://developer.android.com/studio/test/test-in-android-studio" target="_blank">Testes no Android Studio</a></p>
 </aside>
 <ol type="1" start="3">
 <li>Depois de fazer essas alterações, sincronize seu projeto para garantir que elas entrem em vigor.</li>
 </ol>
-<p>Crie uma classe de teste para a tela principal</p>
-<h2 is-upgraded>Criar a classe de teste</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crie uma classe de teste para a tela principal" duration="0">
+        <h2 is-upgraded>Criar a classe de teste</h2>
 <ol type="1">
 <li>No Android Studio, abra o painel Project e encontre esta pasta:</li>
 </ol>
@@ -89,7 +112,7 @@
 <li>Nomeie como <code>MainActivityTest</code>. Assim você saberá que esta classe de teste se refere à <code>MainActivity</code>.</li>
 </ol>
 <h2 is-upgraded>Configurar a classe de teste</h2>
-<p>Com a classe <em><code>MainActivityTest</code></em> gerada e aberta, comece a configurá-la para executar os testes AATK.</p>
+<p>Com a classe <code>MainActivityTest</code> gerada e aberta, comece a configurá-la para executar os testes AATK.</p>
 <ol type="1">
 <li>Anote o escopo da classe para executar com <code>RoboletricTestRunner</code>.</li>
 <li>Declare um atributo privado para manter o <strong>rootView</strong> e o <code>AccessibilityTestRunner</code>.</li>
@@ -126,11 +149,15 @@ public class MainActivityTest {
 </code></pre>
 </li>
 </ol>
-<p>Write your first test</p>
-<p>Adicione um método de teste para cada teste de acessibilidade que deseja executar. Começaremos com a verificação da taxa de contraste de cores.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Escreva seu primeiro teste" duration="5">
+        <p>Adicione um método de teste para cada teste de acessibilidade que deseja executar. Começaremos com a verificação da taxa de contraste de cores.</p>
 <h2 is-upgraded>Crie um teste para verificar a taxa de contraste de cores</h2>
 <p>Uma taxa de contraste adequada ajuda os usuários a identificar melhor o conteúdo do aplicativo. Uma relação de contraste de pelo menos 4,5:1 deve ser usada.</p>
-<p>Você pode utilizar o teste de taxa de contraste do <strong>AATK</strong> (<em><code>TestAdequateContrastRatio</code></em>) da seguinte forma:</p>
+<p>Você pode utilizar o teste de taxa de contraste do <strong>AATK</strong> (<code>TestAdequateContrastRatio</code>) da seguinte forma:</p>
 <ol type="1">
 <li>Adicione um método de teste. Procure seguir boas convenções para nomenclatura de testes. Por exemplo: <strong>deve_UsarTaxaDeContrasteAdequada</strong></li>
 <li>Chame o método <strong>runAccessibilityTest</strong> do executor do kit, passando como parâmetro a view raíz e uma nova instância do teste desejado.<pre><code language="language-java" class="language-java">    @Test

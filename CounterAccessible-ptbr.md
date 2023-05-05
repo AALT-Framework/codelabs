@@ -50,7 +50,7 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
 1. Edite o arquivo **build.gradle** da raíz, adicionando a seguinte linha na lista de repositories.
 
     <aside>
-    <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <i>Gradle Scripts<i>. Dentro, há um arquivo chamado <i>build.gradle (Project: Counter)</i>.
+    <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado build.gradle (Project: Counter).
     </aside>
 
     ```groovy
@@ -65,7 +65,7 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
 2. Configure seu arquivo **build.gradle** no nível do aplicativo para habilitar a execulção de testes com o Robolectric e o AATK, atualizando os **testOptions** e adicionando as dependências necessárias.
 
     <aside>
-    <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção <i>Gradle Scripts<i>. Dentro, há um arquivo chamado <i>build.gradle (Módulo: Counter.app)</i>, ou algo parecido.
+    <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <i>build.gradle (Módulo: Counter.app)</i>, ou algo parecido.
     </aside>
 
     Primeiro, adicione a diretiva **testOptions** com as seguintes linhas, dentro da diretiva **android**, assim:
@@ -156,7 +156,7 @@ Com a classe `MainActivityTest` gerada e aberta, comece a configurá-la para exe
     }
     ```
 <!-- ------------------------ -->
-## Write your first test
+## Escreva seu primeiro teste
 Duration: 5
 
 Adicione um método de teste para cada teste de acessibilidade que deseja executar. Começaremos com a verificação da taxa de contraste de cores.
