@@ -1,2 +1,1 @@
-# codelabs
-Codelabs for Android Apps Accessibility
+# Codelabs for Android Apps Accessibility
