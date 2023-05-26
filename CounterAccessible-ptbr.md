@@ -38,7 +38,7 @@ Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivad
 Você será orientado a executar três testes do AATK para identificar esses problemas rapidamente e corrigi-los. Além disso, você poderá escrever e executar outros testes por conta própria.
 
 ### Clonando e abrindo o projeto
-Você pode obter o código-fonte da versão inicial do aplicativo [neste link](https://github.com/andersongarcia/poor-accessibility-apps). Clone o repositório e abra Counter no Android Studio.
+Você pode obter o código-fonte da versão inicial do aplicativo [neste link](https://github.com/AALT-Framework/poor-accessibility-apps). Clone o repositório e abra Counter no Android Studio.
 
 <aside>
 Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tente seguir todas as etapas para entender como configurar seu projeto. Se você não conseguir fazer isso corretamente, alterne para a branch <strong>Including_AATK</strong> e pule para o teste de escrita.
@@ -87,7 +87,7 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
     dependencies {
         ...
         testImplementation 'org.robolectric:robolectric:4.9'
-        testImplementation 'com.github.andersongarcia:android-accessibility-test-kit:v1.0.0'
+        testImplementation 'com.github.AALT-Framework:android-accessibility-test-kit:v1.0.0'
         ...
     }
     ```
