@@ -54,7 +54,7 @@
 <p>Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivado do [Google Codelabs] (https://developer.android.com/codelabs/starting-android-accessibility). Este aplicativo permite aos usuários rastrear, incrementar e decrementar uma contagem numérica. Embora o aplicativo seja simples, você descobrirá que ele tem alguns problemas de acessibilidade que podem dificultar que usuários com deficiência interajam com ele.</p>
 <p>Você será orientado a executar três testes do AATK para identificar esses problemas rapidamente e corrigi-los. Além disso, você poderá escrever e executar outros testes por conta própria.</p>
 <h2 is-upgraded>Clonando e abrindo o projeto</h2>
-<p>Você pode obter o código-fonte da versão inicial do aplicativo <a href="https://github.com/andersongarcia/poor-accessibility-apps" target="_blank">neste link</a>. Clone o repositório e abra Counter no Android Studio.</p>
+<p>Você pode obter o código-fonte da versão inicial do aplicativo <a href="https://github.com/AALT-Framework/poor-accessibility-apps" target="_blank">neste link</a>. Clone o repositório e abra Counter no Android Studio.</p>
 <aside class="special"><p> Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tente seguir todas as etapas para entender como configurar seu projeto. Se você não conseguir fazer isso corretamente, alterne para a branch <strong>Including_AATK</strong> e pule para o teste de escrita. </p>
 </aside>
 <h2 is-upgraded>Configure o projeto para usar o AATK</h2>
@@ -84,7 +84,7 @@ Primeiro, adicione a diretiva <strong>testOptions</strong> com as seguintes linh
 Em seguida, adicione estas duas dependências como <code>testImplementation</code>:<pre><code language="language-groovy" class="language-groovy">dependencies {
     ...
     testImplementation &#39;org.robolectric:robolectric:4.9&#39;
-    testImplementation &#39;com.github.andersongarcia:android-accessibility-test-kit:v1.0.0&#39;
+    testImplementation &#39;com.github.AALT-Framework:android-accessibility-test-kit:v1.0.0&#39;
     ...
 }
 </code></pre>
