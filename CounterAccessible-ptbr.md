@@ -87,7 +87,7 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
     dependencies {
         ...
         testImplementation 'org.robolectric:robolectric:4.9'
-        testImplementation 'com.github.andersongarcia:android-accessibility-test-kit:v1.0.0-alpha'
+        testImplementation 'com.github.AALT-Framework:android-accessibility-test-kit:v1.0.0-alpha'
         ...
     }
     ```
