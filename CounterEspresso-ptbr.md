@@ -1,10 +1,10 @@
-id: acessibilidade-android-com-testes-automatizados
-summary: Essa prática envolve configurar as dependências necessárias e escrever testes de acessibilidade usando Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK). Ao executar esses testes e analisar os resultados, você poderá identificar e corrigir problemas de acessibilidade em seu aplicativo.
+id: acessibilidade-android-com-espresso
+summary: Essa prática envolve configurar as dependências necessárias e escrever testes de acessibilidade usando Testes de UI com Espresso. Ao executar esses testes e analisar os resultados, você poderá identificar e corrigir problemas de acessibilidade em seu aplicativo.
 authors: Anderson Canale Garcia
 categories: Android
 tags: beginner, developers, testers
 
-# Aplicando o Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK) para o projeto do app Counter
+# Aplicando Testes de UI com o Espresso para o projeto do app Counter
 <!-- ------------------------ -->
 ## Introdução
 Duration: 1
@@ -13,15 +13,24 @@ Os aplicativos __mobile__ podem ajudar as pessoas a realizar tarefas diárias. N
 
 Os desenvolvedores de software desempenham um papel crucial na promoção de melhorias de acessibilidade digital, e os testes automatizados podem ajudá-los.
 
-O **Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK)** consiste em uma coleção de testes de acessibilidade automatizados projetados para serem executados com o **Robolectric**. Isso permite que sejam executados como testes locais, sem a necessidade de um dispositivo físico ou emulado.
+O **Espresso** é um framework de teste de interface do usuário para aplicativos Android, permitindo que os desenvolvedores criem testes automatizados para interagir com os elementos da interface do usuário do aplicativo. É integrado com o Android Studio e pode ser executado em dispositivo físico ou emulado. 
 
-Este kit foi desenvolvido com foco nos problemas de acessibilidade mais comuns e nos widgets mais usados, onde muitos problemas de acessibilidade tendem a ocorrer.
+Para testar acessibilidade com o Espresso, é possível usar a API AccessibilityChecks do Framework de Testes de Acessibilidade (ATF, na sigla em inglês). 
+
+Algumas das checagens realizadas pelo ATF incluem:
+
+* Verificar se todos os elementos da interface do usuário têm rótulos de conteúdo e descrições de texto adequados.
+* Verificar se a ordem de foco dos elementos da interface do usuário é lógica e previsível.
+* Verificar se a taxa de contraste dos elementos da interface do usuário são suficientes.
+* Verificar se as ações do usuário na interface do usuário podem ser realizadas com gestos de toque ou com um teclado.
+* Verificar se a interface do usuário é compatível com os recursos de acessibilidade do Android, como o TalkBack e o modo de alto contraste.
 
 ### O que você aprenderá
 Ao realizar este codelab, você será capaz de:
-1. configurar um projeto existente para usar o AATK
-2. escrever alguns testes de acessibilidade com poucas linhas
-3. executar os testes, identificando e corrigindo problemas de acessibilidade
+1. configurar um projeto existente para usar o Espresso
+2. criar uma classe de teste instrumentado e habilitar as checagens de acessibilidade
+3. executar um teste que realize as checagens de acessibilidade
+4. identificar e corrigir problemas de acessibilidade
 
 ### Pré-requisitos
 Não é necessário nenhum conhecimento prévio sobre acessibilidade ou testes automatizados para realizar este codelab. No entanto, assumimos que você:
@@ -35,14 +44,10 @@ Duration: 5
 ### O app Counter
 Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivado do [Google Codelabs] (https://developer.android.com/codelabs/starting-android-accessibility). Este aplicativo permite aos usuários rastrear, incrementar e decrementar uma contagem numérica. Embora o aplicativo seja simples, você descobrirá que ele tem alguns problemas de acessibilidade que podem dificultar que usuários com deficiência interajam com ele.
 
-Você será orientado a executar três testes do AATK para identificar esses problemas rapidamente e corrigi-los. Além disso, você poderá escrever e executar outros testes por conta própria.
+Você será orientado a executar as checagens de acessibilidade com o Espresso para identificar esses problemas rapidamente e corrigi-los.
 
 ### Clonando e abrindo o projeto
 Você pode obter o código-fonte da versão inicial do aplicativo [neste link](https://github.com/andersongarcia/poor-accessibility-apps). Clone o repositório e abra Counter no Android Studio.
-
-<aside>
-Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tente seguir todas as etapas para entender como configurar seu projeto. Se você não conseguir fazer isso corretamente, alterne para a branch <strong>Including_AATK</strong> e pule para o teste de escrita.
-</aside>
 
 ### Configure o projeto para usar o AATK
 Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:
@@ -156,7 +161,7 @@ Com a classe `MainActivityTest` gerada e aberta, comece a configurá-la para exe
     }
     ```
 <!-- ------------------------ -->
-## Escreva seu primeiro teste
+## Escreva seu primeiro teste - Taxa de Contraste
 Duration: 5
 
 Adicione um método de teste para cada teste de acessibilidade que deseja executar. Começaremos com a verificação da taxa de contraste de cores.
@@ -220,7 +225,7 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
 3. Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.
 
     <aside>
-    <strong>Dica:</strong> No Counter, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <b>android:contentDescription</b> para cada botão.
+    <strong>Dica:</strong> No Counter, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma android:contentDescription para cada botão.
 
     ```xml
         <ImageButton 
@@ -234,7 +239,7 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
             android:contentDescription="@string/increment" />
     ```
 
-    Use strings localizadas nas descrições de conteúdo. Assim, elas poderão ser adequadamente traduzidas. Para este codelab, as strings já foram definidas em <i>res/values/strings.xml</i>.
+    Use strings localizadas nas descrições de conteúdo. Assim, elas poderão ser adequadamente traduzidas. Para este codelab, as strings já foram definidas em res/values/strings.xml.
     </aside>
 
 ### Crie um teste para verificar o tamanho dos alvos de toque
@@ -257,7 +262,7 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
 3. Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.
 
     <aside>
-    <strong>Dica:</strong> Em <b>res/layout/activity_main.xml</b>, podemos ver as seguintes definições para os dois botões:
+    <strong>Dica:</strong> Em **res/layout/activity_main.xml**, podemos ver as seguintes definições para os dois botões:
 
     ```xml
         <ImageButton
@@ -287,13 +292,5 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
             ... />
     ```
 
-    O valor de <i>@dimen/icon_padding</i> está definido como 12dp (veja <i>res/dimens.xml</i>). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).
+    O valor de @dimen/icon_padding está definido como 12dp (veja res/dimens.xml). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).
     </aside>
-
-<!-- ------------------------ -->
-## Conclusão
-Duration: 0
-
-Obrigado por sua participação! 
-
-Lembre-se de retornar ao questionário para concluir última etapa desta pesquisa.

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Aplicando o Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK) para o projeto do app Counter</title>
+  <title>Aplicando Testes de UI com o Espresso para o projeto do app Counter</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -22,22 +22,31 @@
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
-                  id="acessibilidade-android-com-testes-automatizados"
-                  title="Aplicando o Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK) para o projeto do app Counter"
+                  id="acessibilidade-android-com-espresso"
+                  title="Aplicando Testes de UI com o Espresso para o projeto do app Counter"
                   environment="web"
                   feedback-link="">
     
       <google-codelab-step label="Introdução" duration="1">
         <p>Os aplicativos <strong>mobile</strong> podem ajudar as pessoas a realizar tarefas diárias. No entanto, pessoas com deficiência podem enfrentar várias barreiras ao usar os recursos desses dispositivos se eles não fornecerem acessibilidade adequada.</p>
 <p>Os desenvolvedores de software desempenham um papel crucial na promoção de melhorias de acessibilidade digital, e os testes automatizados podem ajudá-los.</p>
-<p>O <strong>Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK)</strong> consiste em uma coleção de testes de acessibilidade automatizados projetados para serem executados com o <strong>Robolectric</strong>. Isso permite que sejam executados como testes locais, sem a necessidade de um dispositivo físico ou emulado.</p>
-<p>Este kit foi desenvolvido com foco nos problemas de acessibilidade mais comuns e nos widgets mais usados, onde muitos problemas de acessibilidade tendem a ocorrer.</p>
+<p>O <strong>Espresso</strong> é um framework de teste de interface do usuário para aplicativos Android, permitindo que os desenvolvedores criem testes automatizados para interagir com os elementos da interface do usuário do aplicativo. É integrado com o Android Studio e pode ser executado em dispositivo físico ou emulado.</p>
+<p>Para testar acessibilidade com o Espresso, é possível usar a API AccessibilityChecks do Framework de Testes de Acessibilidade (ATF, na sigla em inglês).</p>
+<p>Algumas das checagens realizadas pelo ATF incluem:</p>
+<ul>
+<li>Verificar se todos os elementos da interface do usuário têm rótulos de conteúdo e descrições de texto adequados.</li>
+<li>Verificar se a ordem de foco dos elementos da interface do usuário é lógica e previsível.</li>
+<li>Verificar se a taxa de contraste dos elementos da interface do usuário são suficientes.</li>
+<li>Verificar se as ações do usuário na interface do usuário podem ser realizadas com gestos de toque ou com um teclado.</li>
+<li>Verificar se a interface do usuário é compatível com os recursos de acessibilidade do Android, como o TalkBack e o modo de alto contraste.</li>
+</ul>
 <h2 is-upgraded>O que você aprenderá</h2>
 <p>Ao realizar este codelab, você será capaz de:</p>
 <ol type="1">
-<li>configurar um projeto existente para usar o AATK</li>
-<li>escrever alguns testes de acessibilidade com poucas linhas</li>
-<li>executar os testes, identificando e corrigindo problemas de acessibilidade</li>
+<li>configurar um projeto existente para usar o Espresso</li>
+<li>criar uma classe de teste instrumentado e habilitar as checagens de acessibilidade</li>
+<li>executar um teste que realize as checagens de acessibilidade</li>
+<li>identificar e corrigir problemas de acessibilidade</li>
 </ol>
 <h2 is-upgraded>Pré-requisitos</h2>
 <p>Não é necessário nenhum conhecimento prévio sobre acessibilidade ou testes automatizados para realizar este codelab. No entanto, assumimos que você:</p>
@@ -52,11 +61,9 @@
       <google-codelab-step label="Configurando o projeto" duration="5">
         <h2 is-upgraded>O app Counter</h2>
 <p>Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivado do [Google Codelabs] (https://developer.android.com/codelabs/starting-android-accessibility). Este aplicativo permite aos usuários rastrear, incrementar e decrementar uma contagem numérica. Embora o aplicativo seja simples, você descobrirá que ele tem alguns problemas de acessibilidade que podem dificultar que usuários com deficiência interajam com ele.</p>
-<p>Você será orientado a executar três testes do AATK para identificar esses problemas rapidamente e corrigi-los. Além disso, você poderá escrever e executar outros testes por conta própria.</p>
+<p>Você será orientado a executar as checagens de acessibilidade com o Espresso para identificar esses problemas rapidamente e corrigi-los.</p>
 <h2 is-upgraded>Clonando e abrindo o projeto</h2>
 <p>Você pode obter o código-fonte da versão inicial do aplicativo <a href="https://github.com/andersongarcia/poor-accessibility-apps" target="_blank">neste link</a>. Clone o repositório e abra Counter no Android Studio.</p>
-<aside class="special"><p> Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tente seguir todas as etapas para entender como configurar seu projeto. Se você não conseguir fazer isso corretamente, alterne para a branch <strong>Including_AATK</strong> e pule para o teste de escrita. </p>
-</aside>
 <h2 is-upgraded>Configure o projeto para usar o AATK</h2>
 <p>Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:</p>
 <ol type="1">
@@ -153,7 +160,7 @@ public class MainActivityTest {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Escreva seu primeiro teste" duration="5">
+      <google-codelab-step label="Escreva seu primeiro teste - Taxa de Contraste" duration="5">
         <p>Adicione um método de teste para cada teste de acessibilidade que deseja executar. Começaremos com a verificação da taxa de contraste de cores.</p>
 <h2 is-upgraded>Crie um teste para verificar a taxa de contraste de cores</h2>
 <p>Uma taxa de contraste adequada ajuda os usuários a identificar melhor o conteúdo do aplicativo. Uma relação de contraste de pelo menos 4,5:1 deve ser usada.</p>
@@ -192,7 +199,7 @@ public class MainActivityTest {
     }
 </code></pre>
 </li>
-<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> No Counter, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <strong>android:contentDescription</strong> para cada botão. </p>
+<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> No Counter, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma android:contentDescription para cada botão. </p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton 
         android:id=&#34;@+id/subtract_button&#34;
         ...
@@ -203,7 +210,7 @@ public class MainActivityTest {
         ...
         android:contentDescription=&#34;@string/increment&#34; /&gt;
 </code></pre>
-<p>Use strings localizadas nas descrições de conteúdo. Assim, elas poderão ser adequadamente traduzidas. Para este codelab, as strings já foram definidas em <em>res/values/strings.xml</em>.</p>
+<p>Use strings localizadas nas descrições de conteúdo. Assim, elas poderão ser adequadamente traduzidas. Para este codelab, as strings já foram definidas em res/values/strings.xml.</p>
 </aside>
 </li>
 </ol>
@@ -218,7 +225,7 @@ public class MainActivityTest {
     }
 </code></pre>
 </li>
-<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> Em <strong>res/layout/activity_main.xml</strong>, podemos ver as seguintes definições para os dois botões: </p>
+<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> Em **res/layout/activity_main.xml**, podemos ver as seguintes definições para os dois botões: </p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton
         android:id=&#34;@+id/add_button&#34;
         android:layout_width=&#34;wrap_content&#34;
@@ -242,17 +249,10 @@ public class MainActivityTest {
         android:padding=&#34;@dimen/icon_padding&#34;
         ... /&gt;
 </code></pre>
-<p>O valor de <em>@dimen/icon_padding</em> está definido como 12dp (veja <em>res/dimens.xml</em>). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).</p>
+<p>O valor de @dimen/icon_padding está definido como 12dp (veja res/dimens.xml). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).</p>
 </aside>
 </li>
 </ol>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Conclusão" duration="0">
-        <p>Obrigado por sua participação!</p>
-<p>Lembre-se de retornar ao questionário para concluir última etapa desta pesquisa.</p>
 
 
       </google-codelab-step>
