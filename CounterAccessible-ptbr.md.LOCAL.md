@@ -33,12 +33,12 @@ Não é necessário nenhum conhecimento prévio sobre acessibilidade ou testes a
 Duration: 5
 
 ### O app Counter
-Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivado do [Google Codelabs](https://developer.android.com/codelabs/starting-android-accessibility). Este aplicativo permite aos usuários rastrear, incrementar e decrementar uma contagem numérica. Embora o aplicativo seja simples, você descobrirá que ele tem alguns problemas de acessibilidade que podem dificultar que usuários com deficiência interajam com ele.
+Neste codelab, você trabalhará com um aplicativo existente, o Counter, derivado do [Google Codelabs] (https://developer.android.com/codelabs/starting-android-accessibility). Este aplicativo permite aos usuários rastrear, incrementar e decrementar uma contagem numérica. Embora o aplicativo seja simples, você descobrirá que ele tem alguns problemas de acessibilidade que podem dificultar que usuários com deficiência interajam com ele.
 
 Você será orientado a executar três testes do AATK para identificar esses problemas rapidamente e corrigi-los. Além disso, você poderá escrever e executar outros testes por conta própria.
 
 ### Clonando e abrindo o projeto
-Você pode obter o código-fonte da versão inicial do aplicativo [neste link](https://github.com/AALT-Framework/poor-accessibility-apps). Clone o repositório e abra Counter no Android Studio.
+Você pode obter o código-fonte da versão inicial do aplicativo [neste link](https://github.com/andersongarcia/poor-accessibility-apps). Clone o repositório e abra Counter no Android Studio.
 
 <aside>
 Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tente seguir todas as etapas para entender como configurar seu projeto. Se você não conseguir fazer isso corretamente, alterne para a branch <strong>Including_AATK</strong> e pule para o teste de escrita.
