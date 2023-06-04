@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2023-06-04T18:34:17-03:00",
-  "id": "acessibilidade-android-com-testes-automatizados",
+  "updated": "2023-06-04T18:48:25-03:00",
+  "id": "acessibilidade-android-com-testes-automatizados-icmc",
   "duration": 16,
-  "title": "Aplicando o Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK) para o projeto do app Counter",
+  "title": "Aplicando o Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK) para o projeto do app Contador",
   "authors": "Anderson Canale Garcia",
   "summary": "Essa prática envolve configurar as dependências necessárias e escrever testes de acessibilidade usando Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK). Ao executar esses testes e analisar os resultados, você poderá identificar e corrigir problemas de acessibilidade em seu aplicativo.",
-  "source": "CounterAcesseivel.md",
+  "source": "ContadorAcessivel.md",
   "theme": "",
   "status": null,
   "category": [
@@ -20,5 +20,5 @@
     "developers",
     "testers"
   ],
-  "url": "acessibilidade-android-com-testes-automatizados"
+  "url": "acessibilidade-android-com-testes-automatizados-icmc"
 }
