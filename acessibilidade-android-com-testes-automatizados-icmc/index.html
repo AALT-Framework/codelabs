@@ -60,14 +60,14 @@
 <h2 is-upgraded>Configure o projeto para usar o AATK</h2>
 <p>Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:</p>
 <ol type="1">
-<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando a seguinte linha na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <em>Gradle Scripts</em>. Dentro, há um arquivo chamado <em>settings.gradle (Project: Settings)</em>.  </p>
+<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando <strong>maven { url ‘https://jitpack.io&#39; }</strong> na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <em>Gradle Scripts</em>. Dentro, há um arquivo chamado <em>settings.gradle (Project: Settings)</em>.  </p>
 </aside>
 <pre><code language="language-groovy" class="language-groovy">dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        &lt;b&gt;maven { url &#39;https://jitpack.io&#39; }&lt;/b&gt;
+        maven { url &#39;https://jitpack.io&#39; }
     }
 }
 </code></pre>
@@ -107,7 +107,7 @@ Em seguida, adicione estas duas dependências como <code>testImplementation</cod
 <li>No Android Studio, abra o painel Project e encontre esta pasta:</li>
 </ol>
 <ul>
-<li><strong>com.example.android.accessibility.contador (test)</strong>.</li>
+<li><strong>com.example.contador (test)</strong>.</li>
 </ul>
 <ol type="1" start="2">
 <li>Clique com o botão direito na pasta <strong>contador</strong> e selecione <strong>New</strong> &gt; <strong>Java Class</strong></li>
@@ -115,23 +115,8 @@ Em seguida, adicione estas duas dependências como <code>testImplementation</cod
 </ol>
 <h2 is-upgraded>Configurar a classe de teste</h2>
 <p>Com a classe <code>MainActivityTest</code> gerada e aberta, comece a configurá-la para executar os testes AATK.</p>
-<ol type="1">
-<li>Anote o escopo da classe para executar com <code>RoboletricTestRunner</code>.</li>
-<li>Declare um atributo privado para manter o <strong>rootView</strong> e o <code>AccessibilityTestRunner</code>.</li>
-<li>Declare uma propriedade pública para o <code>ErrorCollector</code>.</li>
-<li>Adicione um método <strong>setUp</strong> da seguinte forma:<pre><code language="language-java" class="language-java">@Before
-public void setUp() {
-    MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
-
-    // Obtenha a view raiz da hierarquia de exibição
-    rootView = activity.getWindow().getDecorView().getRootView();
-    runner = new AccessibilityTestRunner(collector);
-}
-</code></pre>
-<aside class="special"><p>O método com a anotação <strong>@Before</strong> sempre é executado antes da execução de cada caso de teste. Essa anotação é comumente usada para estabelecer as pré-condições necessárias para cada método <strong>@Test</strong>.</p>
-</aside>
-</li>
-<li>Neste ponto, seu <code>MainActivityTest</code> deve estar assim:<pre><code language="language-java" class="language-java">@RunWith(RobolectricTestRunner.class)
+<p>Sua classe deverá ficar assim:</p>
+<pre><code language="language-java" class="language-java">@RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
     private View rootView;
     private AccessibilityTestRunner runner;
@@ -149,7 +134,12 @@ public class MainActivityTest {
     }
 }
 </code></pre>
-</li>
+<p>O que foi feito:</p>
+<ol type="1">
+<li>Adicionado o escopo da classe para executar com <code>RoboletricTestRunner</code>.</li>
+<li>Declarado um atributo privado para manter o <strong>rootView</strong> e o <code>AccessibilityTestRunner</code>.</li>
+<li>Declarado uma propriedade pública para o <code>ErrorCollector</code>.</li>
+<li>Adicionado um método <strong>setUp</strong> da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.</li>
 </ol>
 
 

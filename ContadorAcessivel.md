@@ -47,7 +47,7 @@ Você trabalhará na branch <strong>master</strong> ao longo deste codelab. Tent
 ### Configure o projeto para usar o AATK
 Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:
 
-1. Edite o arquivo **build.gradle** da raíz, adicionando a seguinte linha na lista de repositories.
+1. Edite o arquivo **build.gradle** da raíz, adicionando **maven { url 'https://jitpack.io' }** na lista de repositories.
 
     <aside>
     <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <i>Gradle Scripts</i>. Dentro, há um arquivo chamado <i>settings.gradle (Project: Settings)</i>.
@@ -59,7 +59,7 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
         repositories {
             google()
             mavenCentral()
-            <b>maven { url 'https://jitpack.io' }</b>
+            maven { url 'https://jitpack.io' }
         }
     }
     ```
@@ -106,7 +106,7 @@ Nesta tarefa, você escreverá seus primeiros testes de acessibilidade com AATK.
 
 ### Criar a classe de teste
 1. No Android Studio, abra o painel Project e encontre esta pasta:
-* **com.example.android.accessibility.contador (test)**.
+* **com.example.contador (test)**.
 
 2. Clique com o botão direito na pasta **contador** e selecione **New** > **Java Class**
 
@@ -115,15 +115,17 @@ Nesta tarefa, você escreverá seus primeiros testes de acessibilidade com AATK.
 ### Configurar a classe de teste
 Com a classe `MainActivityTest` gerada e aberta, comece a configurá-la para executar os testes AATK.
 
-1. Anote o escopo da classe para executar com `RoboletricTestRunner`.
+Sua classe deverá ficar assim:
 
-2. Declare um atributo privado para manter o __rootView__ e o `AccessibilityTestRunner`.
+```java
+@RunWith(RobolectricTestRunner.class)
+public class MainActivityTest {
+    private View rootView;
+    private AccessibilityTestRunner runner;
 
-3. Declare uma propriedade pública para o `ErrorCollector`.
+    @Rule
+    public ErrorCollector collector = new ErrorCollector();
 
-4. Adicione um método **setUp** da seguinte forma:
-
-    ```java
     @Before
     public void setUp() {
         MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
@@ -132,31 +134,20 @@ Com a classe `MainActivityTest` gerada e aberta, comece a configurá-la para exe
         rootView = activity.getWindow().getDecorView().getRootView();
         runner = new AccessibilityTestRunner(collector);
     }
-    ```
+}
+```
 
-    <aside>O método com a anotação <strong>@Before</strong> sempre é executado antes da execução de cada caso de teste. Essa anotação é comumente usada para estabelecer as pré-condições necessárias para cada método <strong>@Test</strong>.</aside>
+O que foi feito:
 
-5. Neste ponto, seu `MainActivityTest` deve estar assim:
+1. Adicionado o escopo da classe para executar com `RoboletricTestRunner`.
 
-    ```java
-    @RunWith(RobolectricTestRunner.class)
-    public class MainActivityTest {
-        private View rootView;
-        private AccessibilityTestRunner runner;
+2. Declarado um atributo privado para manter o __rootView__ e o `AccessibilityTestRunner`.
 
-        @Rule
-        public ErrorCollector collector = new ErrorCollector();
+3. Declarado uma propriedade pública para o `ErrorCollector`.
 
-        @Before
-        public void setUp() {
-            MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
+4. Adicionado um método **setUp** da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.
 
-            // Obtenha a view raiz da hierarquia de exibição
-            rootView = activity.getWindow().getDecorView().getRootView();
-            runner = new AccessibilityTestRunner(collector);
-        }
-    }
-    ```
+    
 <!-- ------------------------ -->
 ## Escreva seu primeiro teste
 Duration: 5
