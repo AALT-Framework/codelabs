@@ -277,7 +277,7 @@ git checkout -b AATK
     
       <google-codelab-step label="Espresso" duration="20">
         <p>O <strong>Espresso</strong> é um framework de teste de interface do usuário para aplicativos Android, permitindo que os desenvolvedores criem testes automatizados para interagir com os elementos da interface do usuário do aplicativo. É integrado com o Android Studio e pode ser executado em dispositivo físico ou emulado.</p>
-<p>Para testar acessibilidade com o Espresso, é possível usar a API <strong>AccessibilityChecks</strong> do <strong>Framework de Testes de Acessibilidade</strong> (<strong>ATF</strong>, na sigla em inglês).</p>
+<p>Para testar acessibilidade com o Espresso, é possível usar a API <strong><code>AccessibilityChecks</code></strong> do <strong>Framework de Testes de Acessibilidade</strong> (<strong>ATF</strong>, na sigla em inglês).</p>
 <p>Algumas das checagens realizadas pelo <strong>ATF</strong> incluem:</p>
 <ul>
 <li>Verificar se todos os elementos da interface do usuário têm rótulos de conteúdo e descrições de texto adequados.</li>
@@ -289,9 +289,9 @@ git checkout -b AATK
 <h2 is-upgraded>Preparação</h2>
 <p>No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o Espresso no 2º passo deste treinamento.</p>
 <h3 is-upgraded>Configure o projeto para habilitar o AccessibilityChecks</h3>
-<p>Você precisará de uma nova dependência para o pacote <strong>androidTestImplementation</strong>. Confira se a linha seguinte já foi adicionada para você no arquivo <strong>app/build.gradle</strong>.</p>
+<p>Você precisará de uma nova dependência para o pacote <code>androidTestImplementation</code>. Confira se a linha seguinte já foi adicionada para você no arquivo <code>app/build.gradle</code>.</p>
 <ol type="1">
-<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando a seguinte linha na lista de dependencias.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <em>build.gradle (Módulo: Contador.app)</em>, ou algo parecido.  </p>
+<li>Edite o arquivo <code>build.gradle</code> da raíz, adicionando a seguinte linha na lista de dependencias.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <em>build.gradle (Módulo: Contador.app)</em>, ou algo parecido.  </p>
 </aside>
 <pre><code language="language-groovy" class="language-groovy">dependencies {
     ...
@@ -311,12 +311,10 @@ git checkout -b AATK
       <google-codelab-step label="Crie uma classe de teste instrumentado para a tela principal" duration="0">
         <h2 is-upgraded>Criar a classe de teste</h2>
 <ol type="1">
-<li>No Android Studio, abra o painel Project e encontre esta pasta:</li>
-</ol>
-<ul>
-<li><strong>com.example.contador (androidTest)</strong>.</li>
+<li>No Android Studio, abra o painel Project e encontre esta pasta:<ul>
+<li><code>com.example.contador (androidTest)</code>.</li>
 </ul>
-<ol type="1" start="2">
+</li>
 <li>Clique com o botão direito na pasta <strong>contador</strong> e selecione <strong>New</strong> &gt; <strong>Java Class</strong></li>
 <li>Nomeie como <code>MainActivityInstrumentedTest</code>. Assim você saberá que esta classe de teste instrumentado se refere à <code>MainActivity</code>.</li>
 </ol>
@@ -354,17 +352,17 @@ git checkout -b AATK
     }
 
 </code></pre>
-<p>Agora execute o teste novamente. Desta vez, você perceberá que o teste falha. No painel <strong>Run</strong>, clique duas vezes em <strong>testIncrement</strong> para ver os resultados. Você notará a mensagem de erro.</p>
+<p>Agora execute o teste novamente. Desta vez, você perceberá que o teste falha. No painel <strong>Run</strong>, clique duas vezes em <code>testIncrement</code> para ver os resultados. Você notará a mensagem de erro.</p>
 <h2 is-upgraded>Entendendo a falha do teste</h2>
 <p>O teste falhou porque o ATF encontrou duas oportunidades para melhorar a acessibilidade do aplicativo:</p>
 <ol type="1">
-<li>O ImageButton de adição (&#34;+&#34;) contém uma imagem, mas não tem um rótulo. Ele precisa de um rótulo para que um usuário de leitor de tela possa entender o propósito do botão.</li>
-<li>O ImageButton também precisa de um alvo de toque maior para que os usuários com destreza manual limitada possam interagir com o botão com mais facilidade.</li>
+<li>O <code>ImageButton</code> de adição (<code>+</code>) contém uma imagem, mas não tem um rótulo. Ele precisa de um rótulo para que um usuário de leitor de tela possa entender o propósito do botão.</li>
+<li>O <code>ImageButton</code> também precisa de um alvo de toque maior para que os usuários com destreza manual limitada possam interagir com o botão com mais facilidade.</li>
 </ol>
 <h2 is-upgraded>Melhorando sua interface do usuário</h2>
-<p>Nesta etapa, você fará alterações no arquivo <strong>res/layout/activity_main.xml</strong> para atender às sugestões do ATF que estão causando falhas nos seus testes (lembre-se de que o ATF encontrou duas oportunidades para melhorar a acessibilidade, incluindo um rótulo e o aumento do tamanho do alvo de toque):</p>
+<p>Nesta etapa, você fará alterações no arquivo <code>res/layout/activity_main.xml</code> para atender às sugestões do ATF que estão causando falhas nos seus testes (lembre-se de que o ATF encontrou duas oportunidades para melhorar a acessibilidade, incluindo um rótulo e o aumento do tamanho do alvo de toque):</p>
 <p>Primeiro, você irá adicionar um rótulo ao botão de adicionar.</p>
-<p>Abra o arquivo <strong>res/layout/activity_main.xml</strong> e procure o código do primeiro ImageButton (você notará um aviso do lint sobre a falta de <strong>contentDescription</strong>):</p>
+<p>Abra o arquivo <code>res/layout/activity_main.xml</code> e procure o código do primeiro ImageButton (você notará um aviso do lint sobre a falta de <code>contentDescription</code>):</p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton 
         android:id=&#34;@+id/subtract_button&#34;
         ...
@@ -379,7 +377,7 @@ git checkout -b AATK
 <p>Execute o teste novamente e você não verá mais uma falha relacionada ao rótulo do botão.</p>
 <p>Agora você irá abordar a outra recomendação do ATF, que se refere ao tamanho do alvo de toque do botão. O tamanho de toque para o botão é de 24x24dp, e a mensagem de falha do teste indica que o tamanho de toque mínimo recomendado é de 48x48dp.</p>
 <p>Você tem várias opções para aumentar a área sensível ao toque dos botões. Por exemplo, você pode fazer o seguinte:</p>
-<p>Em <strong>res/layout/activity_main.xml</strong>, podemos ver as seguintes definições para os dois botões:</p>
+<p>Em <code>res/layout/activity_main.xml</code>, podemos ver as seguintes definições para os dois botões:</p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton
         android:id=&#34;@+id/add_button&#34;
         android:layout_width=&#34;wrap_content&#34;
@@ -392,7 +390,7 @@ git checkout -b AATK
         android:layout_height=&#34;wrap_content&#34;
         ... /&gt;
 </code></pre>
-<p>Adicione um pouco de padding a cada visualização:</p>
+<p>Adicione um pouco de <em>padding</em> a cada visualização:</p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton
         ...
         android:padding=&#34;@dimen/icon_padding&#34;
@@ -403,7 +401,7 @@ git checkout -b AATK
         android:padding=&#34;@dimen/icon_padding&#34;
         ... /&gt;
 </code></pre>
-<p>O valor de <strong>@dimen/icon_padding</strong> está definido como 12dp (veja res/dimens.xml). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).</p>
+<p>O valor de <code>@dimen/icon_padding</code> está definido como 12dp (veja <code>res/dimens.xml</code>). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).</p>
 <p>Execute o teste novamente. A falha do teste relacionada aos alvos de toque não ocorre mais, portanto o teste é aprovado.</p>
 
 
@@ -421,17 +419,18 @@ git checkout -b AATK
     }
 </code></pre>
 <p>Execute os testes novamente. Desta vez, o teste falhará com a seguinte mensagem de erro:</p>
-<pre><code>...
+<pre>...
 There was 1 accessibility error:
 AppCompatTextView{id=-1, ...}: TextView does not have required contrast of 3.000000. Actual contrast is 2.455571
 at ...
-</code></pre>
+</pre>
 <p>O texto e o plano de fundo da visualização devem ter um contraste de cor maior. Ao definir <code>setRunChecksFromRootView(true)</code>, você encontrou mais oportunidades para melhorar a acessibilidade do seu aplicativo.</p>
 <p>Melhore o contraste de cor para o TextView do contador, alterando a cor do texto de @color/grey para @color/darkGrey.</p>
 <pre><code language="language-xml" class="language-xml">    &lt;TextView
         ...
         android:textColor=&#34;@color/darkGrey&#34;
-        ... /&gt;
+        ... 
+    /&gt;
 </code></pre>
 <p>Agora execute o teste novamente. Com o cinza mais escuro, o texto do contador tem mais contraste de cor com o fundo, então o <strong>ATF</strong> não deve fazer nenhuma sugestão de acessibilidade. O teste deve executar com sucesso até o final.</p>
 
@@ -448,7 +447,7 @@ at ...
 <h3 is-upgraded>Configure o projeto para habilitar o AATK</h3>
 <p>Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:</p>
 <ol type="1">
-<li>Edite o arquivo <strong>build.gradle</strong> da raíz, adicionando <strong>maven { url ‘https://jitpack.io&#39; }</strong> na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <em>Gradle Scripts</em>. Dentro, há um arquivo chamado <em>settings.gradle (Project: Settings)</em>.  </p>
+<li>Edite o arquivo <code>settings.gradle</code> da raíz, adicionando <code>maven { url 'https://jitpack.io' }</code> na lista de repositories.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <em>Gradle Scripts</em>. Dentro, há um arquivo chamado <em>settings.gradle (Project: Settings)</em>.  </p>
 </aside>
 <pre><code language="language-groovy" class="language-groovy">dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -460,9 +459,9 @@ at ...
 }
 </code></pre>
 </li>
-<li>Configure seu arquivo <strong>build.gradle</strong> no nível do aplicativo para habilitar a execução de testes com o Robolectric e o AATK, atualizando os <strong>testOptions</strong> e adicionando as dependências necessárias.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <em>build.gradle (Módulo: Contador.app)</em>, ou algo parecido.  </p>
+<li>Configure seu arquivo <code>build.gradle</code> no nível do aplicativo para habilitar a execução de testes com o Robolectric e o AATK, atualizando os <strong>testOptions</strong> e adicionando as dependências necessárias.  <aside class="special"><p><strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <em>build.gradle (Módulo: Contador.app)</em>, ou algo parecido.  </p>
 </aside>
-Primeiro, adicione a diretiva <strong>testOptions</strong> com as seguintes linhas, dentro da diretiva <strong>android</strong>, assim:<pre><code language="language-groovy" class="language-groovy">android{
+Primeiro, adicione a diretiva <code>testOptions</code> com as seguintes linhas, dentro da diretiva <code>android</code>, assim:<pre><code language="language-groovy" class="language-groovy">android{
     ...
     testOptions {
         // Usado para testar elementos dependentes do Android na pasta de teste
@@ -492,12 +491,10 @@ Em seguida, adicione estas duas dependências como <code>testImplementation</cod
       <google-codelab-step label="Crie uma classe de teste local para a tela principal" duration="0">
         <h2 is-upgraded>Criar a classe de teste</h2>
 <ol type="1">
-<li>No Android Studio, abra o painel Project e encontre esta pasta:</li>
-</ol>
-<ul>
-<li><strong>com.example.contador (test)</strong>.</li>
+<li>No Android Studio, abra o painel Project e encontre esta pasta:<ul>
+<li><code>com.example.contador (test)</code>.</li>
 </ul>
-<ol type="1" start="2">
+</li>
 <li>Clique com o botão direito na pasta <strong>contador</strong> e selecione <strong>New</strong> &gt; <strong>Java Class</strong></li>
 <li>Nomeie como <code>MainActivityTest</code>. Assim você saberá que esta classe de teste se refere à <code>MainActivity</code>.</li>
 </ol>
@@ -506,14 +503,15 @@ Em seguida, adicione estas duas dependências como <code>testImplementation</cod
 <p>Sua classe deverá ficar assim:</p>
 <pre><code language="language-java" class="language-java">@RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
-    private View rootView;
-    private AccessibilityTestRunner runner;
+    private View rootView; // Raiz da hierarquia de exibição
+    private AccessibilityTestRunner runner; // Runner de testes de acessibilidade
 
     @Rule
-    public ErrorCollector collector = new ErrorCollector();
+    public ErrorCollector collector = new ErrorCollector(); // Coletor de erros
 
     @Before
     public void setUp() {
+        // Crie uma instância da atividade
         MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
 
         // Obtenha a view raiz da hierarquia de exibição
@@ -527,7 +525,7 @@ public class MainActivityTest {
 <li>Adicionado o escopo da classe para executar com <code>RoboletricTestRunner</code>.</li>
 <li>Declarado um atributo privado para manter o <strong>rootView</strong> e o <code>AccessibilityTestRunner</code>.</li>
 <li>Declarado uma propriedade pública para o <code>ErrorCollector</code>.</li>
-<li>Adicionado um método <strong>setUp</strong> da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.</li>
+<li>Adicionado um método <code>setUp</code> da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.</li>
 </ol>
 
 
@@ -547,10 +545,10 @@ public class MainActivityTest {
 </code></pre>
 </li>
 <li>Execute seu teste. Clique com o botão direito do mouse sobre o nome do método e selecione <strong>Run MainActivityTest.deve_UsarTaxaDeContrasteAdequada</strong></li>
-<li>No painel <strong>Run</strong>, clique duas vezes em <strong>deve_UsarTaxaDeContrasteAdequada</strong> para ver os resultados. Você notará a mensagem de erro, a identificação <code>View</code>, a taxa esperada e a taxa atual.  <aside class="special"><p><strong>O que isso significa?</strong> No **Contador**, é fácil melhorar o contraste de cores. O TextView exibindo a contagem usa um plano de fundo cinza claro e uma cor de texto cinza. Você pode remover o plano de fundo, escolher um plano de fundo mais claro ou escolher uma cor de texto mais escura. Neste codelab, você escolherá uma cor de texto mais escura.  </p>
+<li>No painel <strong>Run</strong>, clique duas vezes em <code>deve_UsarTaxaDeContrasteAdequada</code> para ver os resultados. Você notará a mensagem de erro, a identificação <code>View</code>, a taxa esperada e a taxa atual.  <aside class="special"><p><strong>O que isso significa?</strong> No <strong>Contador</strong>, é fácil melhorar o contraste de cores. O TextView exibindo a contagem usa um plano de fundo cinza claro e uma cor de texto cinza. Você pode remover o plano de fundo, escolher um plano de fundo mais claro ou escolher uma cor de texto mais escura. Neste codelab, você escolherá uma cor de texto mais escura.  </p>
 </aside>
 </li>
-<li>Abra o arquivo <strong>res/layout/activity_main.xml</strong>, encontre o <strong>TextView</strong> e altere <strong>android:textColor=&#34;@color/grey&#34;</strong> para <strong>android:textColor=&#34;@color/darkGrey&#34;</strong>.  <aside class="special"><p>  Os nomes dessas cores são uma predefinições desse projeto de exemplo. Para ver todas as cores pré-definidas, verifique o arquivo <strong>res/values/colors.xml</strong>.  </p>
+<li>Abra o arquivo <code>res/layout/activity_main.xml</code>, encontre o <code>TextView</code> e altere <code>android:textColor="@color/grey"</code> para <code>android:textColor="@color/darkGrey"</code>.  <aside class="special"><p>  Os nomes dessas cores são uma predefinições desse projeto de exemplo. Para ver todas as cores pré-definidas, verifique o arquivo <strong>res/values/colors.xml</strong>.  </p>
 </aside>
 </li>
 <li>Volte ao item <strong>3</strong> para refazer o teste e ver se ele passou.</li>
@@ -572,7 +570,7 @@ public class MainActivityTest {
     }
 </code></pre>
 </li>
-<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> No **Contador**, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <strong>android:contentDescription</strong> para cada botão. </p>
+<li>Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.  <aside class="special"><p><strong>Dica:</strong> No <strong>Contador</strong>, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <strong>android:contentDescription</strong> para cada botão. </p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton 
         android:id=&#34;@+id/subtract_button&#34;
         ...
@@ -591,8 +589,8 @@ public class MainActivityTest {
 <p>Todos os elementos de interação devem ter no mínimo 48x48dp.</p>
 <p>Para esse teste, você irá utilizar o teste de texto alternativo do <strong>AATK</strong> (<code>TestTouchTargetSize</code>), assim como fez para os testes anteriores.</p>
 <ol type="1">
-<li>Adicione um método de teste. Por exemplo: <strong>deve_AlvoDeToquePossuirTamanhoMinimo</strong></li>
-<li>Chame o método <strong>runAccessibilityTest</strong> do executor do kit, passando como parâmetro a view raíz e uma nova instância do teste desejado.<pre><code language="language-java" class="language-java">    @Test
+<li>Adicione um método de teste. Por exemplo: <code>deve_AlvoDeToquePossuirTamanhoMinimo</code></li>
+<li>Chame o método <code>runAccessibilityTest</code> do executor do kit, passando como parâmetro a view raíz e uma nova instância do teste desejado.<pre><code language="language-java" class="language-java">    @Test
     public void deve_AlvoDeToquePossuirTamanhoMinimo(){
         runner.runAccessibilityTest(rootView, new TestTouchTargetSize());
     }
@@ -611,7 +609,7 @@ public class MainActivityTest {
         android:layout_height=&#34;wrap_content&#34;
         ... /&gt;
 </code></pre>
-<p>Adicione um pouco de padding a cada visualização:</p>
+<p>Adicione um pouco de <em>padding</em> a cada visualização:</p>
 <pre><code language="language-xml" class="language-xml">    &lt;ImageButton
         ...
         android:padding=&#34;@dimen/icon_padding&#34;
@@ -630,8 +628,17 @@ public class MainActivityTest {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Conclusão" duration="0">
+      <google-codelab-step label="Conclusão" duration="2">
         <p>Obrigado por sua participação!</p>
+<h2 is-upgraded>Créditos</h2>
+<p><a href="htttps://codelabs.developers.google.com/codelabs/android-accessibility-testing" target="_blank">Android Accessibility Codelab</a></p>
+<h2 is-upgraded>Agradecimentos</h2>
+<ul>
+<li>Profa. Dra. Renata Pontin de Mattos Fortes (ICMC/USP)</li>
+<li>Profa. Dra. Kamila Rios da Hora Rodrigues (ICMC/USP)</li>
+<li>Profa. Dra. Maria da Graça Campos Pimentel (ICMC/USP)</li>
+<li>Juliana Martins Leoncio Eusebio (ICMC/USP)</li>
+</ul>
 
 
       </google-codelab-step>

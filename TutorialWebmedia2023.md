@@ -294,7 +294,7 @@ Duration: 20
 
 O **Espresso** é um framework de teste de interface do usuário para aplicativos Android, permitindo que os desenvolvedores criem testes automatizados para interagir com os elementos da interface do usuário do aplicativo. É integrado com o Android Studio e pode ser executado em dispositivo físico ou emulado. 
 
-Para testar acessibilidade com o Espresso, é possível usar a API **AccessibilityChecks** do **Framework de Testes de Acessibilidade** (**ATF**, na sigla em inglês). 
+Para testar acessibilidade com o Espresso, é possível usar a API **`AccessibilityChecks`** do **Framework de Testes de Acessibilidade** (**ATF**, na sigla em inglês). 
 
 Algumas das checagens realizadas pelo **ATF** incluem:
 
@@ -310,9 +310,9 @@ Algumas das checagens realizadas pelo **ATF** incluem:
 No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o Espresso no 2º passo deste treinamento.
 
 #### Configure o projeto para habilitar o AccessibilityChecks
-Você precisará de uma nova dependência para o pacote **androidTestImplementation**. Confira se a linha seguinte já foi adicionada para você no arquivo **app/build.gradle**.
+Você precisará de uma nova dependência para o pacote `androidTestImplementation`. Confira se a linha seguinte já foi adicionada para você no arquivo `app/build.gradle`.
 
-1. Edite o arquivo **build.gradle** da raíz, adicionando a seguinte linha na lista de dependencias.
+1. Edite o arquivo `build.gradle` da raíz, adicionando a seguinte linha na lista de dependencias.
 
     <aside>
     <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <i>build.gradle (Módulo: Contador.app)</i>, ou algo parecido.
@@ -338,7 +338,7 @@ Nesta tarefa, você criará uma classe de teste instrumentado e habilitará as c
 
 ### Criar a classe de teste
 1. No Android Studio, abra o painel Project e encontre esta pasta:
-* **com.example.contador (androidTest)**.
+    * `com.example.contador (androidTest)`.
 
 2. Clique com o botão direito na pasta **contador** e selecione **New** > **Java Class**
 
@@ -388,24 +388,24 @@ Para configurar a classe `MainActivityInstrumentedTest` para checagens de acessi
 
 ```
 
-Agora execute o teste novamente. Desta vez, você perceberá que o teste falha. No painel **Run**, clique duas vezes em **testIncrement** para ver os resultados. Você notará a mensagem de erro.
+Agora execute o teste novamente. Desta vez, você perceberá que o teste falha. No painel **Run**, clique duas vezes em `testIncrement` para ver os resultados. Você notará a mensagem de erro.
 
 ### Entendendo a falha do teste
 
 O teste falhou porque o ATF encontrou duas oportunidades para melhorar a acessibilidade do aplicativo:
 
-1. O ImageButton de adição ("+") contém uma imagem, mas não tem um rótulo. Ele precisa de um rótulo para que um usuário de leitor de tela possa entender o propósito do botão.
+1. O `ImageButton` de adição (`+`) contém uma imagem, mas não tem um rótulo. Ele precisa de um rótulo para que um usuário de leitor de tela possa entender o propósito do botão.
 
-2. O ImageButton também precisa de um alvo de toque maior para que os usuários com destreza manual limitada possam interagir com o botão com mais facilidade.
+2. O `ImageButton` também precisa de um alvo de toque maior para que os usuários com destreza manual limitada possam interagir com o botão com mais facilidade.
 
 
 ### Melhorando sua interface do usuário
 
-Nesta etapa, você fará alterações no arquivo **res/layout/activity_main.xml** para atender às sugestões do ATF que estão causando falhas nos seus testes (lembre-se de que o ATF encontrou duas oportunidades para melhorar a acessibilidade, incluindo um rótulo e o aumento do tamanho do alvo de toque):
+Nesta etapa, você fará alterações no arquivo `res/layout/activity_main.xml` para atender às sugestões do ATF que estão causando falhas nos seus testes (lembre-se de que o ATF encontrou duas oportunidades para melhorar a acessibilidade, incluindo um rótulo e o aumento do tamanho do alvo de toque):
 
 Primeiro, você irá adicionar um rótulo ao botão de adicionar.
 
-Abra o arquivo **res/layout/activity_main.xml** e procure o código do primeiro ImageButton (você notará um aviso do lint sobre a falta de **contentDescription**):
+Abra o arquivo `res/layout/activity_main.xml` e procure o código do primeiro ImageButton (você notará um aviso do lint sobre a falta de `contentDescription`):
 ```xml
     <ImageButton 
         android:id="@+id/subtract_button"
@@ -426,7 +426,7 @@ Agora você irá abordar a outra recomendação do ATF, que se refere ao tamanho
 
 Você tem várias opções para aumentar a área sensível ao toque dos botões. Por exemplo, você pode fazer o seguinte:
 
-Em **res/layout/activity_main.xml**, podemos ver as seguintes definições para os dois botões:
+Em `res/layout/activity_main.xml`, podemos ver as seguintes definições para os dois botões:
 
 ```xml
     <ImageButton
@@ -442,7 +442,7 @@ Em **res/layout/activity_main.xml**, podemos ver as seguintes definições para 
         ... />
 ```
 
-Adicione um pouco de padding a cada visualização:
+Adicione um pouco de _padding_ a cada visualização:
 
 ```xml
     <ImageButton
@@ -456,7 +456,7 @@ Adicione um pouco de padding a cada visualização:
         ... />
 ```
 
-O valor de **@dimen/icon_padding** está definido como 12dp (veja res/dimens.xml). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).
+O valor de `@dimen/icon_padding` está definido como 12dp (veja `res/dimens.xml`). Quando o padding é aplicado, a área de toque do controle se torna 48dp x 48dp (24dp + 12dp em cada direção).
 
 Execute o teste novamente. A falha do teste relacionada aos alvos de toque não ocorre mais, portanto o teste é aprovado.
 
@@ -478,7 +478,7 @@ Modifique seu método `enableAccessibilityChecks()` da seguinte forma:
 
 Execute os testes novamente. Desta vez, o teste falhará com a seguinte mensagem de erro:
 
-```
+```console
 ...
 There was 1 accessibility error:
 AppCompatTextView{id=-1, ...}: TextView does not have required contrast of 3.000000. Actual contrast is 2.455571
@@ -492,7 +492,8 @@ Melhore o contraste de cor para o TextView do contador, alterando a cor do texto
     <TextView
         ...
         android:textColor="@color/darkGrey"
-        ... />
+        ... 
+    />
 ```
 
 Agora execute o teste novamente. Com o cinza mais escuro, o texto do contador tem mais contraste de cor com o fundo, então o **ATF** não deve fazer nenhuma sugestão de acessibilidade. O teste deve executar com sucesso até o final.
@@ -518,7 +519,7 @@ No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada 
 
 Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:
 
-1. Edite o arquivo **build.gradle** da raíz, adicionando **maven { url 'https://jitpack.io' }** na lista de repositories.
+1. Edite o arquivo `settings.gradle` da raíz, adicionando `maven { url 'https://jitpack.io' }` na lista de repositories.
 
     <aside>
     <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização do Android (painel esquerdo), há uma seção <i>Gradle Scripts</i>. Dentro, há um arquivo chamado <i>settings.gradle (Project: Settings)</i>.
@@ -535,13 +536,13 @@ Siga os seguintes passos para preparar o projeto para adicionar testes de acessi
     }
     ```
 
-2. Configure seu arquivo **build.gradle** no nível do aplicativo para habilitar a execução de testes com o Robolectric e o AATK, atualizando os **testOptions** e adicionando as dependências necessárias.
+2. Configure seu arquivo `build.gradle` no nível do aplicativo para habilitar a execução de testes com o Robolectric e o AATK, atualizando os **testOptions** e adicionando as dependências necessárias.
 
     <aside>
     <strong>Onde encontro isso?</strong> Ao abrir o projeto no Android Studio, na visualização Android (painel esquerdo), há uma seção Gradle Scripts. Dentro, há um arquivo chamado <i>build.gradle (Módulo: Contador.app)</i>, ou algo parecido.
     </aside>
 
-    Primeiro, adicione a diretiva **testOptions** com as seguintes linhas, dentro da diretiva **android**, assim:
+    Primeiro, adicione a diretiva `testOptions` com as seguintes linhas, dentro da diretiva `android`, assim:
 
     ```groovy
     android{
@@ -577,7 +578,7 @@ Nesta tarefa, você escreverá seus primeiros testes de acessibilidade com AATK.
 
 ### Criar a classe de teste
 1. No Android Studio, abra o painel Project e encontre esta pasta:
-* **com.example.contador (test)**.
+    * `com.example.contador (test)`.
 
 2. Clique com o botão direito na pasta **contador** e selecione **New** > **Java Class**
 
@@ -591,14 +592,15 @@ Sua classe deverá ficar assim:
 ```java
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
-    private View rootView;
-    private AccessibilityTestRunner runner;
+    private View rootView; // Raiz da hierarquia de exibição
+    private AccessibilityTestRunner runner; // Runner de testes de acessibilidade
 
     @Rule
-    public ErrorCollector collector = new ErrorCollector();
+    public ErrorCollector collector = new ErrorCollector(); // Coletor de erros
 
     @Before
     public void setUp() {
+        // Crie uma instância da atividade
         MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
 
         // Obtenha a view raiz da hierarquia de exibição
@@ -616,7 +618,7 @@ O que foi feito:
 
 3. Declarado uma propriedade pública para o `ErrorCollector`.
 
-4. Adicionado um método **setUp** da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.
+4. Adicionado um método `setUp` da seguinte para habilitar que o kit seja executado em qualquer novo texte criado.
 
 <!-- ------------------------ -->
 ## Escreva seu primeiro teste com o AATK
@@ -643,13 +645,13 @@ Você pode utilizar o teste de taxa de contraste do **AATK** (`TestAdequateContr
 
 3. Execute seu teste. Clique com o botão direito do mouse sobre o nome do método e selecione **Run MainActivityTest.deve_UsarTaxaDeContrasteAdequada**
 
-4. No painel **Run**, clique duas vezes em **deve_UsarTaxaDeContrasteAdequada** para ver os resultados. Você notará a mensagem de erro, a identificação `View`, a taxa esperada e a taxa atual.
+4. No painel **Run**, clique duas vezes em `deve_UsarTaxaDeContrasteAdequada` para ver os resultados. Você notará a mensagem de erro, a identificação `View`, a taxa esperada e a taxa atual.
 
     <aside>
-    <strong>O que isso significa?</strong> No **Contador**, é fácil melhorar o contraste de cores. O TextView exibindo a contagem usa um plano de fundo cinza claro e uma cor de texto cinza. Você pode remover o plano de fundo, escolher um plano de fundo mais claro ou escolher uma cor de texto mais escura. Neste codelab, você escolherá uma cor de texto mais escura.
+    <strong>O que isso significa?</strong> No <b>Contador</b>, é fácil melhorar o contraste de cores. O TextView exibindo a contagem usa um plano de fundo cinza claro e uma cor de texto cinza. Você pode remover o plano de fundo, escolher um plano de fundo mais claro ou escolher uma cor de texto mais escura. Neste codelab, você escolherá uma cor de texto mais escura.
     </aside>
 
-5. Abra o arquivo **res/layout/activity_main.xml**, encontre o **TextView** e altere **android:textColor="@color/grey"** para **android:textColor="@color/darkGrey"**.
+5. Abra o arquivo `res/layout/activity_main.xml`, encontre o `TextView` e altere `android:textColor="@color/grey"` para `android:textColor="@color/darkGrey"`.
 
     <aside>
     Os nomes dessas cores são uma predefinições desse projeto de exemplo. Para ver todas as cores pré-definidas, verifique o arquivo <strong>res/values/colors.xml</strong>.
@@ -683,7 +685,7 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
 3. Execute seu teste. Verifique os resultados. Realize as correções. Reexecute o teste.
 
     <aside>
-    <strong>Dica:</strong> No **Contador**, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <b>android:contentDescription</b> para cada botão.
+    <strong>Dica:</strong> No <b>Contador</b>, os controles - e + não tem rótulos. Para corrigir esse problema, atribua uma <b>android:contentDescription</b> para cada botão.
 
     ```xml
         <ImageButton 
@@ -706,9 +708,9 @@ Todos os elementos de interação devem ter no mínimo 48x48dp.
 
 Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`TestTouchTargetSize`), assim como fez para os testes anteriores.
 
-1. Adicione um método de teste. Por exemplo: **deve_AlvoDeToquePossuirTamanhoMinimo**
+1. Adicione um método de teste. Por exemplo: `deve_AlvoDeToquePossuirTamanhoMinimo`
 
-2. Chame o método **runAccessibilityTest** do executor do kit, passando como parâmetro a view raíz e uma nova instância do teste desejado.
+2. Chame o método `runAccessibilityTest` do executor do kit, passando como parâmetro a view raíz e uma nova instância do teste desejado.
 
     ```java
         @Test
@@ -736,7 +738,7 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
             ... />
     ```
 
-    Adicione um pouco de padding a cada visualização:
+    Adicione um pouco de _padding_ a cada visualização:
 
     ```xml
         <ImageButton
@@ -755,6 +757,15 @@ Para esse teste, você irá utilizar o teste de texto alternativo do **AATK** (`
 
 <!-- ------------------------ -->
 ## Conclusão
-Duration: 0
+Duration: 2
 
 Obrigado por sua participação! 
+
+### Créditos
+[Android Accessibility Codelab](htttps://codelabs.developers.google.com/codelabs/android-accessibility-testing)
+
+### Agradecimentos
+* Profa. Dra. Renata Pontin de Mattos Fortes (ICMC/USP)
+* Profa. Dra. Kamila Rios da Hora Rodrigues (ICMC/USP)
+* Profa. Dra. Maria da Graça Campos Pimentel (ICMC/USP)
+* Juliana Martins Leoncio Eusebio (ICMC/USP)
