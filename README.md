@@ -7,3 +7,5 @@
 3. [Improve Counter app accessibility with Espresso](https://developer.android.com/codelabs/a11y-testing-espresso)
 
 4. [Melhorar a acessibilidade do app Counter com o Scanner de Acessibilidade](https://developer.android.com/codelabs/starting-android-accessibility?hl=pt-br)
+
+5. [Como testar a acessibilidade em soluções mobile](tutorial-acessibilidade-webmedia2023)
