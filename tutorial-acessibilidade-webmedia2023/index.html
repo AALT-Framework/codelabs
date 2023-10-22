@@ -72,7 +72,13 @@
 <p>Você pode obter o código-fonte da versão inicial do aplicativo <a href="https://github.com/AALT-Framework/poor-accessibility-apps" target="_blank">neste link</a>.</p>
 <h2 is-upgraded>Clonando o projeto</h2>
 <p>Você será orientado a executar testes de acessibilidade para identificar esses problemas com cada uma das três ferramentas apresentadas neste tutorial. Para isso, você pode, de acordo com suas habilidades e preferências, escolher entre as seguintes opções:</p>
-<h3 is-upgraded><strong>Opção A) Clonar o projeto do aplicativo Contador do GitHub três vezes, em diferentes pastas para cada ferramenta.</strong></h3>
+<ul>
+<li>Criar três cópias da pasta do projeto localmente.</li>
+<li>Trabalhar em <em>branches</em> diferentes, uma para cada ferramenta.</li>
+<li>Trabalhar com uma única cópia, e desfazer as alterações antes de mudar de ferramenta.</li>
+</ul>
+<p>Para simplificação deste tutorial, iremos considerar apenas a primeira opção.</p>
+<h3 is-upgraded>Clonar o repositório e criar uma cópia do projeto do aplicatico Contador para cada ferramenta.**</h3>
 <ol type="1">
 <li>Abra o terminal ou prompt de comando no diretório onde deseja clonar o projeto.</li>
 <li>Clone o repositório disponível em <code>https://github.com/AALT-Framework/poor-accessibility-apps/</code></li>
@@ -84,34 +90,6 @@
 </li>
 <li>Para cada ferramenta, abra a respectiva pasta do projeto no Android Studio e siga as instruções do tutorial.</li>
 </ol>
-<p><strong>Exemplo em Linux</strong></p>
-<pre><code language="language-bash" class="language-bash">git clone https://github.com/AALT-Framework/poor-accessibility-apps/
-cp -r poor-accessibility-apps/Contador Contador-AccessibilityScanner
-cp -r poor-accessibility-apps/Contador Contador-Espresso
-cp -r poor-accessibility-apps/Contador Contador-AATK
-</code></pre>
-<h3 is-upgraded><strong>Opção B) Clonar o projeto do aplicativo Contador do GitHub uma vez e criar três </strong><strong><em>branches</em></strong><strong> diferentes, uma para cada ferramenta.</strong></h3>
-<ol type="1">
-<li>Abra o terminal ou prompt de comando no diretório onde deseja clonar o projeto.</li>
-<li>Clone o repositório disponível em <code>https://github.com/AALT-Framework/poor-accessibility-apps/</code><pre><code language="language-bash" class="language-bash">git clone https://github.com/AALT-Framework/poor-accessibility-apps/
-</code></pre>
-</li>
-<li>Isso irá clonar o repositório inteiro. Entre na pasta &#34;poor-accessibility-apps&#34; e crie uma nova branch para cada ferramenta. Nomeie cada branch de acordo com a ferramenta que você deseja testar, da seguinte forma:<ul>
-<li>AccessibilityScanner</li>
-<li>Espresso</li>
-<li>AATK</li>
-</ul>
-<pre><code language="language-bash" class="language-bash">cd poor-accessibility-apps
-git checkout -b AccessibilityScanner
-git checkout -b Espresso
-git checkout -b AATK
-</code></pre>
-</li>
-<li>Para cada ferramenta, alterne para a respectiva branch da ferramenta. <strong>Exemplo para o Accessibility Scanner</strong><pre><code language="language-bash" class="language-bash">git checkout AccessibilityScanner
-</code></pre>
-</li>
-<li>Abra o projeto da subpasta &#34;Contador&#34; no Android Studio e siga as instruções do tutorial.</li>
-</ol>
 
 
       </google-codelab-step>
@@ -120,7 +98,7 @@ git checkout -b AATK
         <p>O <strong>Scanner de acessibilidade (Accessibility Scanner)</strong> é uma ferramenta criada pelo Google para sugerir melhorias de acessibilidade em <em>apps</em> Android, como aumento de áreas de toque pequenas, aumento de contraste e descrições de conteúdo. Elas possibilitam que pessoas com deficiência possam usar os <em>apps</em> com mais facilidade.</p>
 <h2 is-upgraded>Preparação</h2>
 <ol type="1">
-<li>No Android Studio, abra o projeto do aplicativo <strong>Contador</strong>, da pasta especificada para o <strong>Accessibility Scanner</strong> no 2º passo deste treinamento.</li>
+<li>No Android Studio, abra o projeto do aplicativo <strong>Contador</strong>, da pasta <strong>Contador-AccessibilityScanner</strong>, criada no 2º passo deste treinamento.</li>
 <li>Execute o projeto no dispositivo Android ou emulador. O app Contador será aberto.</li>
 <li>Siga estas etapas para fazer o download e configurar o Scanner de acessibilidade:<ol type="1">
 <li>Abra o app Play Store no dispositivo Android.</li>
@@ -287,7 +265,7 @@ git checkout -b AATK
 <li>Verificar se a interface do usuário é compatível com os recursos de acessibilidade do Android, como o TalkBack e o modo de alto contraste.</li>
 </ul>
 <h2 is-upgraded>Preparação</h2>
-<p>No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o Espresso no 2º passo deste treinamento.</p>
+<p>No Android Studio, abra o projeto do aplicativo <strong>Contador</strong>, da pasta <strong>Contador-Espresso</strong> criada no 2º passo deste treinamento.</p>
 <h3 is-upgraded>Configure o projeto para habilitar o AccessibilityChecks</h3>
 <p>Você precisará de uma nova dependência para o pacote <code>androidTestImplementation</code>. Confira se a linha seguinte já foi adicionada para você no arquivo <code>app/build.gradle</code>.</p>
 <ol type="1">
@@ -443,7 +421,7 @@ at ...
 <p>O <strong>Kit de Testes de Acessibilidade Automatizados para Aplicativos Android (AATK)</strong> consiste em uma coleção de testes de acessibilidade automatizados projetados para serem executados com o <strong>Robolectric</strong>. Isso permite que sejam executados como testes locais, sem a necessidade de um dispositivo físico ou emulado.</p>
 <p>Este kit foi desenvolvido com foco nos problemas de acessibilidade mais comuns e nos widgets mais usados, onde muitos problemas de acessibilidade tendem a ocorrer.</p>
 <h2 is-upgraded>Preparação</h2>
-<p>No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o AATK no 2º passo deste treinamento.</p>
+<p>No Android Studio, abra o projeto do aplicativo <strong>Contador</strong>, da pasta <strong>Contador-AATK</strong>, criada no 2º passo deste treinamento.</p>
 <h3 is-upgraded>Configure o projeto para habilitar o AATK</h3>
 <p>Siga os seguintes passos para preparar o projeto para adicionar testes de acessibilidade automatizados:</p>
 <ol type="1">
