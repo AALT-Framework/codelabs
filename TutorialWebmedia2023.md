@@ -59,7 +59,13 @@ Você pode obter o código-fonte da versão inicial do aplicativo [neste link](h
 
 Você será orientado a executar testes de acessibilidade para identificar esses problemas com cada uma das três ferramentas apresentadas neste tutorial. Para isso, você pode, de acordo com suas habilidades e preferências, escolher entre as seguintes opções:
 
-#### **Opção A) Clonar o projeto do aplicativo Contador do GitHub três vezes, em diferentes pastas para cada ferramenta.**
+* Criar três cópias da pasta do projeto localmente.
+* Trabalhar em _branches_ diferentes, uma para cada ferramenta.
+* Trabalhar com uma única cópia, e desfazer as alterações antes de mudar de ferramenta.
+
+Para simplificação deste tutorial, iremos considerar apenas a primeira opção.
+
+#### Clonar o repositório e criar uma cópia do projeto do aplicatico Contador para cada ferramenta.**
 1. Abra o terminal ou prompt de comando no diretório onde deseja clonar o projeto.
 2. Clone o repositório disponível em `https://github.com/AALT-Framework/poor-accessibility-apps/`
 3. Crie uma cópia da pasta "Contador", que está dentro do repositório clonado, para cada projeto. Nomeie cada cópia de acordo com a ferramenta que você deseja testar, da seguinte forma:
@@ -67,39 +73,6 @@ Você será orientado a executar testes de acessibilidade para identificar esses
     - **Contador-Espresso**
     - **Contador-AATK**
 4. Para cada ferramenta, abra a respectiva pasta do projeto no Android Studio e siga as instruções do tutorial.
-
-**Exemplo em Linux**
-
-```bash
-git clone https://github.com/AALT-Framework/poor-accessibility-apps/
-cp -r poor-accessibility-apps/Contador Contador-AccessibilityScanner
-cp -r poor-accessibility-apps/Contador Contador-Espresso
-cp -r poor-accessibility-apps/Contador Contador-AATK
-```
-
-#### **Opção B) Clonar o projeto do aplicativo Contador do GitHub uma vez e criar três _branches_ diferentes, uma para cada ferramenta.**
-1. Abra o terminal ou prompt de comando no diretório onde deseja clonar o projeto.
-2. Clone o repositório disponível em `https://github.com/AALT-Framework/poor-accessibility-apps/`
-    ```bash
-    git clone https://github.com/AALT-Framework/poor-accessibility-apps/
-    ```
-3. Isso irá clonar o repositório inteiro. Entre na pasta "poor-accessibility-apps" e crie uma nova branch para cada ferramenta. Nomeie cada branch de acordo com a ferramenta que você deseja testar, da seguinte forma:
-    - AccessibilityScanner
-    - Espresso
-    - AATK
-    ```bash
-    cd poor-accessibility-apps
-    git checkout -b AccessibilityScanner
-    git checkout -b Espresso
-    git checkout -b AATK
-    ```
-4. Para cada ferramenta, alterne para a respectiva branch da ferramenta.
-    **Exemplo para o Accessibility Scanner**
-
-    ```bash
-    git checkout AccessibilityScanner
-    ```
-5. Abra o projeto da subpasta "Contador" no Android Studio e siga as instruções do tutorial.
 
 <!-- ------------------------ -->
 ## Accessibility Scanner
@@ -109,7 +82,7 @@ O **Scanner de acessibilidade (Accessibility Scanner)** é uma ferramenta criada
 
 ### Preparação
 
-1. No Android Studio, abra o projeto do aplicativo **Contador**, da pasta especificada para o **Accessibility Scanner** no 2º passo deste treinamento.
+1. No Android Studio, abra o projeto do aplicativo **Contador**, da pasta **Contador-AccessibilityScanner**, criada no 2º passo deste treinamento.
 
 2. Execute o projeto no dispositivo Android ou emulador. O app Contador será aberto.
 
@@ -307,7 +280,7 @@ Algumas das checagens realizadas pelo **ATF** incluem:
 
 ### Preparação
 
-No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o Espresso no 2º passo deste treinamento.
+No Android Studio, abra o projeto do aplicativo **Contador**, da pasta **Contador-Espresso** criada no 2º passo deste treinamento.
 
 #### Configure o projeto para habilitar o AccessibilityChecks
 Você precisará de uma nova dependência para o pacote `androidTestImplementation`. Confira se a linha seguinte já foi adicionada para você no arquivo `app/build.gradle`.
@@ -513,7 +486,7 @@ Este kit foi desenvolvido com foco nos problemas de acessibilidade mais comuns e
 
 ### Preparação
 
-No Android Studio, abra o projeto do aplicativo Contador, da pasta especificada para o AATK no 2º passo deste treinamento.
+No Android Studio, abra o projeto do aplicativo **Contador**, da pasta **Contador-AATK**, criada no 2º passo deste treinamento.
 
 #### Configure o projeto para habilitar o AATK
 
