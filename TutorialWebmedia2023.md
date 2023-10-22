@@ -74,6 +74,15 @@ Para simplificação deste tutorial, iremos considerar apenas a primeira opção
     - **Contador-AATK**
 4. Para cada ferramenta, abra a respectiva pasta do projeto no Android Studio e siga as instruções do tutorial.
 
+**Exemplo em Linux**
+
+```bash
+git clone https://github.com/AALT-Framework/poor-accessibility-apps/
+cp -r poor-accessibility-apps/Contador Contador-AccessibilityScanner
+cp -r poor-accessibility-apps/Contador Contador-Espresso
+cp -r poor-accessibility-apps/Contador Contador-AATK
+```
+
 <!-- ------------------------ -->
 ## Accessibility Scanner
 Duration: 20
